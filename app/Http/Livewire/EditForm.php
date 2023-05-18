@@ -22,6 +22,30 @@ class EditForm extends Component
         ]);
     }
 
+    public function update(){
+        $this->library->update([
+            'name' => $this->name,
+            'address' => $this->address,
+            'description' => $this->description
+        ]);
+
+        if($this->image){
+            $this->library->update([
+                'image' => $this->image->store('public/images'),
+            ]);
+            $this->old_image = $this->image->temporaryUrl();
+        }
+
+        session()->flash('libraryUpdated' , 'Hai aggiornato la libreria');
+
+    }
+
+    public function destroy(){
+        $this->library->delete();
+
+        return redirect(route('library.index'));
+    }
+
     public function mount(){
         $this->name = $this->library->name;
         $this->address = $this->library->address;

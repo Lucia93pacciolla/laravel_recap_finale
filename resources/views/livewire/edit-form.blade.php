@@ -1,5 +1,5 @@
 <div>
-    <form class="p-5 border" wire:submit.prevent="">
+    <form class="p-5 border" wire:submit.prevent="update">
 
         @if ($errors->any())
             <div class="alert alert-danger">
@@ -11,9 +11,9 @@
             </div>
         @endif
 
-            @if (session()->has('message'))
+            @if (session()->has('libraryUpdated'))
             <div class="alert alert-success">
-                {{ session('message') }}
+                {{ session('libraryUpdated') }}
             </div>
 
             @endif
@@ -58,7 +58,8 @@
 
        
 
-        <button type="submit" class="btn btn-dark">Inserisci libreria</button>
-        <a href="{{route('library.index')}}" class="btn btn-outline-dark">Torna indietro</a>
-      </form>
+        <button type="submit" class="btn btn-dark">Aggiorna libreria</button>
+        <a href="{{route('library.show', compact('library'))}}" class="btn btn-outline-dark">Torna indietro</a>
+        <button type="button" class="btn btn-danger" wire:click="destroy">Cancella libreria</button>
+    </form>
 </div>

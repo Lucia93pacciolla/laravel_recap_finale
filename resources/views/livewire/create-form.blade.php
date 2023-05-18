@@ -11,9 +11,9 @@
             </div>
         @endif
 
-            @if (session()->has('message'))
+            @if (session()->has('libraryCreated'))
             <div class="alert alert-success">
-                {{ session('message') }}
+                {{ session('libraryCreated') }}
             </div>
 
             @endif
